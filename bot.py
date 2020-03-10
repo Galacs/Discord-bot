@@ -122,7 +122,7 @@ async def chatMuteCmd(ctx, player: discord.Member=None, arg=None):
             break
 
     for channel in ctx.guild.channels:
-        await channel.set_permissions(mutedRole, read_messages=True, send_messages=False, send_tts_messages=False)
+        await channel.set_permissions(mutedRole, send_messages=False, send_tts_messages=False)
     
     await player.add_roles(mutedRole)
 
