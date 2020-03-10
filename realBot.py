@@ -102,15 +102,29 @@ async def nbsplayers(ctx):
     ctx.message.delete()
     await ctx.send(f"Il y a {len(ctx.guild.members)} membres sur le serveur {ctx.guild.name}")
 
-# @bot.command(name="chatmute")
-# @commands.has_role(adminRole)
-# async def chatMuteCmd(ctx, player: discord.member=None, arg=None):
-#     isMutedRoledCreated = False
-#     for role in ctx.guild.roles:
-#         if role.name == "Muted":
-#             isMutedRoledCreated = True
-#             break
+@bot.command(name="chatmute")
+@commands.has_role(adminRole)
+async def chatMuteCmd(ctx, player: discord.Member=None, arg=None):
+    await ctx.message.delete()
+    isMutedRoledCreated = False
+    for role in ctx.guild.roles:
+        if role.name == "Muted":
+            isMutedRoledCreated = True
+            break
+    if not isMutedRoledCreated:
+        await ctx.guild.create_role(name="Muted")
     
+    mutedRole = None
+
+    for role in ctx.guild.roles:
+        if role.name == "Muted":
+            mutedRole = role
+            break
+
+    for channel in ctx.guild.channels:
+        await channel.set_permissions(mutedRole, read_messages=True, send_messages=False, send_tts_messages=False)
+    
+    await player.add_roles(mutedRole)
 
 
 @bot.command(name="hack")
