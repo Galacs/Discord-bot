@@ -1,0 +1,35 @@
+@bot.command(name="kick")
+@commands.has_role(adminRole)
+async def kickCmd (ctx, member: discord.Member=None, arg=""):
+    await ctx.message.delete()
+    await member.kick(reason=reason)
+    if arg == "":
+        if reason != "":
+            await ctx.send(f"{ctx.author.mention} a kick {member.mention} pour la raison: \"{reason}\"")
+        elif reason == "":
+            await ctx.send(f"{ctx.author.mention} a kick {member.mention}")
+    elif arg == 's':
+        pass
+    elif arg == "a":
+        if reason == "":
+            await ctx.send(f"{member.mention} a était kick")
+        elif reason != "":
+            await ctx.send(f"{member.mention} a était kick pour la raison: {reason}")
+
+@bot.command(name="ban")
+@commands.has_role(adminRole)
+async def banCmd (ctx, member: discord.Member=None, reason="", arg="", days="5"):
+    await ctx.message.delete()
+    await member.ban(reason=reason, delete_message_days=days)
+    if arg == "":
+        if reason != "":
+            await ctx.send(f"{ctx.author.mention} a ban {member.mention} pour la raison: \"{reason}\"")
+        elif reason == "":
+            await ctx.send(f"{ctx.author.mention} a ban {member.mention}")
+    elif arg == 's':
+        pass
+    elif arg == "a":
+        if reason == "":
+            await ctx.send(f"{member.mention} a était ban")
+        elif reason != "":
+            await ctx.send(f"{member.mention} a était ban pour la raison: {reason}")
