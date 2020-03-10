@@ -108,16 +108,16 @@ async def chatMuteCmd(ctx, player: discord.Member=None, arg=None):
     await ctx.message.delete()
     isMutedRoledCreated = False
     for role in ctx.guild.roles:
-        if role.name == "Muted":
+        if role.name == "Proxy Muted":
             isMutedRoledCreated = True
             break
     if not isMutedRoledCreated:
-        await ctx.guild.create_role(name="Muted")
+        await ctx.guild.create_role(name="Proxy Muted")
     
     mutedRole = None
 
     for role in ctx.guild.roles:
-        if role.name == "Muted":
+        if role.name == "Proxy Muted":
             mutedRole = role
             break
 
