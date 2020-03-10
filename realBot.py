@@ -8,10 +8,12 @@ prefix = "%"
 
 adminRole = "admin"
 
+botOwnerId = 330718440409137152
+
 bot = commands.Bot(command_prefix=prefix)
 
 def isBotOwner(ctx):
-    return ctx.message.author.id == 330718440409137152
+    return ctx.message.author.id == botOwnerId
 
 @bot.command(name="ping")
 async def pingCmd(ctx):
@@ -83,16 +85,16 @@ async def statsCmd(ctx, arg=None):
                 players += 1
         await ctx.send(f"Je sert dans {len(bot.guilds)} serveurs et aide {players} joueurs")
 
-    if ctx.message.author.id == 330718440409137152 and arg == "full":
+    if ctx.message.author.id == botOwnerId and arg == "full":
         await ctx.send(f'{bot.user.name} est connecter sur les serveurs suivant:')
         for guild in bot.guilds:
             members = '\n - '.join([member.name for member in guild.members])            
             await ctx.send("\n"+f'{guild.name}(id: {guild.id})\nMembres du serveur:\n - {members}')
         await ctx.send("Fin de la liste")
-    if ctx.message.author.id == 330718440409137152 and arg == None:
+    if ctx.message.author.id == botOwnerId and arg == None:
         await msg()
     
-    elif ctx.message.author.id != 330718440409137152:
+    elif ctx.message.author.id != botOwnerId:
         await msg()
 
 @bot.command(name="nbplayers")
