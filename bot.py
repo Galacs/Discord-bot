@@ -18,28 +18,6 @@ bot = commands.Bot(command_prefix=prefix)
 def isBotOwner(ctx):
     return ctx.message.author.id == botOwnerId
 
-@bot.command(name="load")
-@commands.check(isBotOwner)
-async def loadCmd(ctx, extension):
-    await ctx.message.delete()
-    bot.load_extension(f'commands.{extension}')
-    await ctx.send(f"{str(extension)} a été chargé")
-
-@bot.command(name="unload")
-@commands.check(isBotOwner)
-async def unloadCmd(ctx, extension):
-    await ctx.message.delete()
-    bot.unload_extension(f'commands.{extension}')
-    await ctx.send(f"{str(extension)} a été déchargé")
-
-@bot.command(name="reload")
-@commands.check(isBotOwner)
-async def reloadCmd(ctx, extension):
-    await ctx.message.delete()
-    bot.unload_extension(f'commands.{extension}')
-    bot.load_extension(f'commands.{extension}')
-    await ctx.send(f"{str(extension)} a été rechargé")
-
 for filename in os.listdir("./commands"):
     if filename.endswith(".py"):
         bot.load_extension(f"commands.{filename[:-3]}")
