@@ -164,10 +164,6 @@ async def on_ready():
 # Message de Bienvenue
 @bot.event
 async def on_member_join(member):
-    if member.id == 556577574189269016:
-        await member.kick()
-        print("supra kicked")
-        return
     await member.create_dm()
     await member.dm_channel.send(f'{member.name}, Bienvenue sur le serveur')
 
