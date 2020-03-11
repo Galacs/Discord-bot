@@ -45,7 +45,7 @@ async def clearCmd(ctx, count: int=50, arg = None):
     return
 
 @bot.command(name="kick")
-@commands.has_permissions(kick_member=True)
+@commands.has_permissions(kick_members=True)
 async def kickCmd (ctx, member: discord.Member=None, arg=""):
     await ctx.message.delete()
     await member.kick()
@@ -57,7 +57,7 @@ async def kickCmd (ctx, member: discord.Member=None, arg=""):
         await ctx.send(f"{member.mention} a était kick")
 
 @bot.command(name="ban")
-@commands.has_permissions(ban_member=True)
+@commands.has_permissions(ban_members=True)
 async def banCmd (ctx, member: discord.Member=None, arg="", days="5"):
     await ctx.message.delete()
     await member.ban(delete_message_days=days)
