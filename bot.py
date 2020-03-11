@@ -1,4 +1,4 @@
-import discord, asyncio
+import discord, asyncio, os
 from discord.ext import commands
 
 token = "Njg1MTk3MTA4Mjc3NDExODgz.XmFJug.Pr6_mGENgRGFIDzsk2YSfn27pX8"
@@ -18,11 +18,31 @@ bot.remove_command("help")
 def isBotOwner(ctx):
     return ctx.message.author.id == botOwnerId
 
-@bot.command(name="ping")
-async def pingCmd(ctx):
+@bot.command(name="load")
+@commands.check(isBotOwner)
+async def loadCmd(ctx, extension):
     await ctx.message.delete()
-    await ctx.send('Pong! {0}'.format(round(bot.latency, 1)))
-    return
+    bot.load_extension(f'commands.{extension}')
+    await ctx.send(f"{str(extension)} a été chargé")
+
+@bot.command(name="unload")
+@commands.check(isBotOwner)
+async def unloadCmd(ctx, extension):
+    await ctx.message.delete()
+    bot.unload_extension(f'commands.{extension}')
+    await ctx.send(f"{str(extension)} a été déchargé")
+
+@bot.command(name="reload")
+@commands.check(isBotOwner)
+async def reloadCmd(ctx, extension):
+    await ctx.message.delete()
+    bot.unload_extension(f'commands.{extension}')
+    bot.load_extension(f'commands.{extension}')
+    await ctx.send(f"{str(extension)} a été rechargé")
+
+for filename in os.listdir("./commands"):
+    if filename.endswith(".py"):
+        bot.load_extension(f"commands.{filename[:-3]}")
 
 @bot.command(name="args")
 @commands.check(isBotOwner)
@@ -140,7 +160,6 @@ async def chatMuteCmd(ctx, player: discord.Member=None, arg=None):
     elif arg == "s":
         return
 
-# to improve
 @bot.command(name="timer")
 async def countdown(ctx, time: int=10):
     await ctx.message.delete()
