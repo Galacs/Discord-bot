@@ -12,8 +12,8 @@ botOwnerId = 330718440409137152
 
 bot = commands.Bot(command_prefix=prefix)
 
-# remove default help command
-bot.remove_command("help")
+# # remove default help command
+# bot.remove_command("help")
 
 def isBotOwner(ctx):
     return ctx.message.author.id == botOwnerId
@@ -50,22 +50,6 @@ async def argsCmd(ctx, *args):
         await ctx.message.delete()
         await ctx.send('{} Arguments: {}'.format(len(args), ', '.join(args)))
         return
-
-@bot.command(name="clear")
-@commands.has_permissions(manage_messages=True)
-async def clearCmd(ctx, count: int=50, arg = None):
-    await ctx.message.delete()
-    await ctx.channel.purge(limit=count)
-    try:
-        if arg == None:
-            await ctx.send("{0.author.mention} a supprimé ".format(ctx)+str(count)+" messages.")
-    except:
-        pass
-    if arg == "s":
-        pass
-    if arg == "a":
-        await ctx.send(str(count)+" messages ont été supprimé.")
-    return
 
 @bot.command(name="kick")
 @commands.has_permissions(kick_members=True)
