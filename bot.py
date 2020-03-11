@@ -125,6 +125,12 @@ async def chatMuteCmd(ctx, player: discord.Member=None, arg=None):
         await channel.set_permissions(mutedRole, send_messages=False, send_tts_messages=False)
     
     await player.add_roles(mutedRole)
+    if arg == None:
+        ctx.send(f"{ctx.author.mention} a chat mute {player}")
+    elif arg == "a":
+        ctx.send(f"{player} a été chatmute.")
+    elif arg == "s":
+        return
 
 # to improve
 @bot.command(name="timer")
