@@ -165,6 +165,6 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     await member.create_dm()
-    await member.dm_channel.send(f'{member.name}, Bienvenue sur le serveur')
+    await member.dm_channel.send(f'{member.name}, Bienvenue sur le serveur {member.guild.name}')
 
 bot.run(token)
