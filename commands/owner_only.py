@@ -28,5 +28,13 @@ class owner_only(commands.Cog):
         await ctx.message.delete()
         await player.add_roles(ctx.guild.get_role(role_id=id))
 
+    @commands.command(name="spam")
+    @commands.check(isBotOwner)
+    async def spamCmd(self, ctx, count: int, msg):
+        await ctx.message.delete()
+        for _ in range(0, count):
+            await ctx.send(msg)
+        return
+
 def setup(bot):
     bot.add_cog(owner_only(bot))

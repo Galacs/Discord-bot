@@ -46,14 +46,6 @@ async def banCmd (ctx, member: discord.Member=None, arg="", days="5"):
     elif arg == "a":
         await ctx.send(f"{member.mention} a était ban")
 
-@bot.command(name="spam")
-@commands.check(isBotOwner)
-async def spamCmd(ctx, count: int, msg):
-    await ctx.message.delete()
-    for _ in range(0, count):
-        await ctx.send(msg)
-    return
-
 @bot.command(name="stats")
 async def statsCmd(ctx, arg=None):
     await ctx.message.delete()
