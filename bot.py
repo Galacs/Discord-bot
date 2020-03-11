@@ -99,7 +99,7 @@ async def statsCmd(ctx, arg=None):
 
 @bot.command(name="nbplayers")
 async def nbsplayers(ctx):
-    ctx.message.delete()
+    await ctx.message.delete()
     await ctx.send(f"Il y a {len(ctx.guild.members)} membres sur le serveur {ctx.guild.name}")
 
 @bot.command(name="chatmute")
