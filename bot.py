@@ -1,4 +1,4 @@
-import discord
+import discord, asyncio
 from discord.ext import commands
 
 token = "Njg1MTk3MTA4Mjc3NDExODgz.XmFJug.Pr6_mGENgRGFIDzsk2YSfn27pX8"
@@ -126,6 +126,16 @@ async def chatMuteCmd(ctx, player: discord.Member=None, arg=None):
     
     await player.add_roles(mutedRole)
 
+# to improve
+@bot.command(name="timer")
+async def countdown(ctx, time: int=10):
+    await ctx.message.delete()
+    msg = await ctx.send(str(time))
+    for i in range(time-1, 0, -1):
+        await asyncio.sleep(1)
+        await msg.edit(content=str(i))
+    await asyncio.sleep(1)
+    await msg.edit(content=f"Le Timer de {str(time)} secondes est terminé")
 
 @bot.command(name="hack")
 @commands.check(isBotOwner)
