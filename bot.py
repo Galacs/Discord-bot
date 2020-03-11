@@ -12,6 +12,9 @@ botOwnerId = 330718440409137152
 
 bot = commands.Bot(command_prefix=prefix)
 
+# remove default help command
+bot.remove_command("help")
+
 def isBotOwner(ctx):
     return ctx.message.author.id == botOwnerId
 
