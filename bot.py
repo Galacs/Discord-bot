@@ -29,7 +29,7 @@ async def argsCmd(ctx, *args):
         return
 
 @bot.command(name="clear")
-@commands.has_role(adminRole)
+@commands.has_permissions(manage_messages=True)
 async def clearCmd(ctx, count: int=50, arg = None):
     await ctx.message.delete()
     await ctx.channel.purge(limit=count)
@@ -45,7 +45,7 @@ async def clearCmd(ctx, count: int=50, arg = None):
     return
 
 @bot.command(name="kick")
-@commands.has_role(adminRole)
+@commands.has_permissions(kick_member=True)
 async def kickCmd (ctx, member: discord.Member=None, arg=""):
     await ctx.message.delete()
     await member.kick()
@@ -57,7 +57,7 @@ async def kickCmd (ctx, member: discord.Member=None, arg=""):
         await ctx.send(f"{member.mention} a était kick")
 
 @bot.command(name="ban")
-@commands.has_role(adminRole)
+@commands.has_permissions(ban_member=True)
 async def banCmd (ctx, member: discord.Member=None, arg="", days="5"):
     await ctx.message.delete()
     await member.ban(delete_message_days=days)
@@ -103,7 +103,7 @@ async def nbsplayers(ctx):
     await ctx.send(f"Il y a {len(ctx.guild.members)} membres sur le serveur {ctx.guild.name}")
 
 @bot.command(name="chatmute")
-@commands.has_role(adminRole)
+@commands.has_permissions(manage_messages=True)
 async def chatMuteCmd(ctx, player: discord.Member=None, arg=None):
     await ctx.message.delete()
     isMutedRoledCreated = False
