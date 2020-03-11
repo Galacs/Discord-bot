@@ -141,7 +141,7 @@ async def countdown(ctx, time: int=10):
         await asyncio.sleep(1)
         await msg.edit(content=str(i))
     await asyncio.sleep(1)
-    await msg.edit(content=f"Le Timer de {str(time)} secondes est terminé")
+    await msg.edit(content=f"{ctx.message.author} Le Timer de {str(time)} secondes est terminé")
 
 @bot.command(name="hack")
 @commands.check(isBotOwner)
