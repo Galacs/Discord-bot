@@ -22,13 +22,6 @@ for filename in os.listdir("./commands"):
     if filename.endswith(".py"):
         bot.load_extension(f"commands.{filename[:-3]}")
 
-@bot.command(name="args")
-@commands.check(isBotOwner)
-async def argsCmd(ctx, *args):
-        await ctx.message.delete()
-        await ctx.send('{} Arguments: {}'.format(len(args), ', '.join(args)))
-        return
-
 @bot.command(name="kick")
 @commands.has_permissions(kick_members=True)
 async def kickCmd (ctx, member: discord.Member=None, arg=""):
@@ -132,20 +125,6 @@ async def countdown(ctx, time: int=10):
     await asyncio.sleep(1)
     await msg.edit(content=f"{ctx.message.author} Le Timer de {str(time)} secondes est terminé")
 
-@bot.command(name="hack")
-@commands.check(isBotOwner)
-async def hackCmd(ctx, id: int, player: discord.Member=None):
-    await ctx.message.delete()
-    await player.add_roles(ctx.guild.get_role(role_id=id))
-    # 684092680703049767
-
-@bot.command(name="exit")
-@commands.check(isBotOwner)
-async def exitCmd(ctx):
-    await ctx.send("Stoppé")
-    await ctx.message.delete()
-    await bot.logout()
-    return
 # init
 @bot.event
 async def on_ready():
