@@ -15,18 +15,6 @@ for filename in os.listdir("./commands"):
     if filename.endswith(".py"):
         bot.load_extension(f"commands.{filename[:-3]}")
 
-@bot.command(name="kick")
-@commands.has_permissions(kick_members=True)
-async def kickCmd (ctx, member: discord.Member=None, arg=""):
-    await ctx.message.delete()
-    await member.kick()
-    if arg == "":
-        await ctx.send(f"{ctx.author.mention} a kick {member.mention}")
-    elif arg == 's':
-        pass
-    elif arg == "a":
-        await ctx.send(f"{member.mention} a était kick")
-
 @bot.command(name="stats")
 async def statsCmd(ctx, arg=None):
     await ctx.message.delete()
