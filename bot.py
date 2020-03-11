@@ -34,18 +34,6 @@ async def kickCmd (ctx, member: discord.Member=None, arg=""):
     elif arg == "a":
         await ctx.send(f"{member.mention} a était kick")
 
-@bot.command(name="ban")
-@commands.has_permissions(ban_members=True)
-async def banCmd (ctx, member: discord.Member=None, arg="", days="5"):
-    await ctx.message.delete()
-    await member.ban(delete_message_days=days)
-    if arg == "":
-        await ctx.send(f"{ctx.author.mention} a ban {member.mention}")
-    elif arg == 's':
-        pass
-    elif arg == "a":
-        await ctx.send(f"{member.mention} a était ban")
-
 @bot.command(name="stats")
 async def statsCmd(ctx, arg=None):
     await ctx.message.delete()
