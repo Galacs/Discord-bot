@@ -78,6 +78,7 @@ async def spamCmd(ctx, count: int, msg):
 
 @bot.command(name="stats")
 async def statsCmd(ctx, arg=None):
+    await ctx.message.delete()
     async def msg():
         players = 0
         for guild in bot.guilds:
