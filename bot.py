@@ -92,6 +92,10 @@ async def statsCmd(ctx, arg=None):
             members = '\n - '.join([member.name for member in guild.members])            
             await ctx.send("\n"+f'{guild.name}(id: {guild.id})\nMembres du serveur:\n - {members}')
         await ctx.send("Fin de la liste")
+    if isBotOwner(ctx) and arg == "server" or not isBotOwner(ctx) and arg == "server":
+        members = '\n - '.join([member.name for member in ctx.guild.members])       
+        await ctx.send("\n"+f'{ctx.guild.name}(id: {ctx.guild.id})\nMembres du serveur:\n - {members}')
+        await ctx.send(f"Il y a {len(ctx.guild.members)} membres sur le serveur {ctx.guild.name}")
     if isBotOwner(ctx) and arg == None:
         await msg()
     
