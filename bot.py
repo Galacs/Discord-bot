@@ -15,16 +15,6 @@ for filename in os.listdir("./commands"):
     if filename.endswith(".py"):
         bot.load_extension(f"commands.{filename[:-3]}")
 
-# init
-@bot.event
-async def on_ready():
-    print(f'{bot.user.name} est connecter sur Discord !')
-    print(f'{bot.user.name} est connecter sur les serveurs suivant:')
-    for guild in bot.guilds:
-        print("\n"+f'{guild.name}(id: {guild.id})')
-        members = '\n - '.join([member.name for member in guild.members])
-        print(f'Membres du serveur:\n - {members}')
-        
 # Message de Bienvenue
 @bot.event
 async def on_member_join(member):
