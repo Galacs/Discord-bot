@@ -15,10 +15,4 @@ for filename in os.listdir("./commands"):
     if filename.endswith(".py"):
         bot.load_extension(f"commands.{filename[:-3]}")
 
-# Message de Bienvenue
-@bot.event
-async def on_member_join(member):
-    await member.create_dm()
-    await member.dm_channel.send(f'{member.name}, Bienvenue sur le serveur {member.guild.name}')
-
 bot.run(token)
