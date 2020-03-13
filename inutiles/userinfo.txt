@@ -1,0 +1,19 @@
+    @commands.command(name="userinfo")
+    async def user_infoCmd(self, ctx, player: discord.Member):
+        await ctx.message.delete()
+        game = []
+        spotify = []
+        try:
+            game.append(player.activities[0].name)
+        except IndexError:
+            game.append(f"{str(player)} à aucune activité en cours")
+        try:
+            game.append(player.activities[0].details)
+        except:
+            game.append("")
+        await ctx.send(embed=discord.Embed(title= f"Informations sur l'utilisateur {str(player)}:",)
+            .set_thumbnail(url=player.avatar_url)
+            .set_author(name=ctx.message.author.name+" a demandé ces informations", icon_url=ctx.author.avatar_url)
+            .add_field(name=f"Date de l'arrivé sur le serveur {ctx.guild.name}:", value=player.joined_at)
+            .add_field(name=f"Activité Actuel de {str(player)}:", value=f"\n{game[0]}\n{game[1]}")
+            .add_field(name=f"Musique que {str(player)} écoute actuellement sur spotify:"), value=spotify)
