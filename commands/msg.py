@@ -9,8 +9,14 @@ class msg(commands.Cog):
         self.bot = bot
     @commands.Cog.listener()
     async def on_ready(self):
+        if not os.path.exists("servers"):
+            os.mkdir("servers")
         for guild in self.bot.guilds:
-            data = json.load(open(f'./servers/{guild.id}.json'))
+            try:
+                data = json.load(open(f'./servers/{guild.id}.json'))
+            except FileNotFoundError:
+                pass
+            data = {}
             data["server_name"] = guild.name
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
 
