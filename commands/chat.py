@@ -42,7 +42,10 @@ class chat(commands.Cog):
 
     @commands.Cog.listener()
     async def on_guild_channel_create(self, channel):
-        await channel.set_permissions(channel.guild.get_role(json.load(open(f'./servers/{channel.guild.id}.json'))["muted_role"]), send_messages=False, send_tts_messages=False)
+        try:
+            await channel.set_permissions(channel.guild.get_role(json.load(open(f'./servers/{channel.guild.id}.json'))["muted_role"]), send_messages=False, send_tts_messages=False)
+        except:
+            pass
 
 def setup(bot):
     bot.add_cog(chat(bot))
