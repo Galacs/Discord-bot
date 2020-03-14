@@ -11,7 +11,7 @@ class ping(commands.Cog):
     async def pingCmd(self, ctx):
         await ctx.message.delete()
         try:
-            await ctx.send(getmsg(ctx.guild, "ping").format(round(int(self.bot.latency*1000), 1)))
+            await ctx.send(getmsg(ctx.guild, "ping").format(latency=round(int(self.bot.latency*1000), 1)))
         except KeyError:
             await ctx.send('Pong! Mon ping est de {0}ms'.format(round(int(self.bot.latency*1000), 1)))
         return
