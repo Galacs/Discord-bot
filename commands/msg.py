@@ -17,6 +17,14 @@ class msg(commands.Cog):
             except FileNotFoundError:
                 data = {}
             data["server_name"] = guild.name
+            try:
+                data["mute_channel_configured"]
+            except KeyError:
+                data["mute_channel_configured"] = False
+            try:
+                data["muted_role"]
+            except KeyError:
+                data["muted_role"] = 0
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
 
     @commands.Cog.listener()
