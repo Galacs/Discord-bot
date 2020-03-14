@@ -15,8 +15,7 @@ class msg(commands.Cog):
             try:
                 data = json.load(open(f'./servers/{guild.id}.json'))
             except FileNotFoundError:
-                pass
-            data = {}
+                data = {}
             data["server_name"] = guild.name
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
 
