@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from commands.msg import getmsg
 
 class ping(commands.Cog):
 
@@ -9,7 +10,10 @@ class ping(commands.Cog):
     @commands.command(name="ping")
     async def pingCmd(self, ctx):
         await ctx.message.delete()
-        await ctx.send('Pong! Mon ping est de {0}ms'.format(round(int(self.bot.latency*1000), 1)))
+        try:
+            await ctx.send(getmsg(ctx.guild, "ping").format(round(int(self.bot.latency*1000), 1)))
+        except KeyError:
+            await ctx.send('Pong! Mon ping est de {0}ms'.format(round(int(self.bot.latency*1000), 1)))
         return
 
 def setup(bot):
