@@ -20,6 +20,23 @@ class msg(commands.Cog):
             data["server_name"] = guild.name
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
 
+    @commands.Cog.listener()
+    async def on_guild_join(self, guild):
+        try:
+            data = json.load(open(f'./servers/{guild.id}.json'))
+        except FileNotFoundError:
+            pass
+        data = {}
+        data["server_name"] = guild.name
+        json.dump(data, open(f"./servers/{guild.id}.json", "w"))
+
+    @commands.Cog.listener()
+    async def on_guild_remove(self, guild):
+        try:
+            os.remove(f"./servers/{guild.id}.json")
+        except:
+            pass
+
     @commands.command(name="showmsg")
     @commands.has_permissions(administrator=True)
     async def msgCmd(self, ctx, msg: str):
