@@ -39,6 +39,7 @@ class msg(commands.Cog):
     @commands.command(name="showmsg")
     @commands.has_permissions(administrator=True)
     async def msgCmd(self, ctx, msg: str):
+        await ctx.message.delete()
         data = json.load(open(f'./servers/{ctx.guild.id}.json'))
         try:
             await ctx.send(data[msg])
@@ -49,6 +50,7 @@ class msg(commands.Cog):
     @commands.command(name="setmsg")
     @commands.has_permissions(administrator=True)
     async def setmsgCmd(self, ctx, response: str,message: str):
+        await ctx.message.delete()
         data = json.load(open(f'./servers/{ctx.guild.id}.json'))
         data[response] = message
         json.dump(data, open(f"./servers/{ctx.guild.id}.json", "w"))
@@ -57,6 +59,7 @@ class msg(commands.Cog):
     @commands.command(name="setdefault")
     @commands.has_permissions(administrator=True)
     async def setdefault(self, ctx, msg):
+        await ctx.message.delete()
         data = json.load(open(f'./servers/{ctx.guild.id}.json'))
         del data[msg]
         json.dump(data, open(f"./servers/{ctx.guild.id}.json", "w"))
@@ -64,6 +67,7 @@ class msg(commands.Cog):
     @commands.command(name="showallmsg")
     @commands.has_permissions(administrator=True)
     async def showallmsg(self, ctx):
+        await ctx.message.delete()
         await ctx.send(json.load(open(f'./servers/{ctx.guild.id}.json')))
 
 def setup(bot):
