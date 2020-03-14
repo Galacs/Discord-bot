@@ -12,7 +12,7 @@ class start_message(commands.Cog):
         print(f'{self.bot.user.name} est connecter sur les serveurs suivant:')
         for guild in self.bot.guilds:
             print("\n"+f'{guild.name}(id: {guild.id})')
-            members = '\n - '.join([member.name for member in guild.members])
+            members = '\n - '.join([str(member) for member in guild.members])
             print(f'Membres du serveur:\n - {members}')
 
 def setup(bot):
