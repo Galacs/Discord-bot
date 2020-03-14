@@ -10,7 +10,7 @@ class ban(commands.Cog):
     @commands.has_permissions(ban_members=True)
     async def banCmd (self, ctx, member: discord.Member=None, arg="", days="5"):
         await ctx.message.delete()
-        await member.ban(delete_message_days=days)
+        await member.ban(delete_message_days=days, reason=f"Ban par {str(ctx.message.author)}")
         if arg == "":
             await ctx.send(f"{ctx.author.mention} a banni(e) {member.mention}")
         elif arg == 's':
