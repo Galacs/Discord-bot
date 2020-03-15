@@ -4,11 +4,15 @@ from discord.ext import commands
 langs = {}
 servers_settings = {}
 
+for file in os.listdir("./msg/langs/"):
+    langs[file[:-5]] = (json.load(open('./msg/langs/'+file)))
+
 def getmsg(guild, r1, r2):
     data = json.load(open(f'./msg/custom_commands/{guild.id}.json'))
     try:
         d = data[r1][r2]
-    except KeyError:
+    except:
+        print(langs)
         d = langs[servers_settings[str(guild.id)]["lang"]][r1][r2]
     return d
 
@@ -46,8 +50,6 @@ class msg(commands.Cog):
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
             for file in os.listdir("./servers/"):
                 servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
-        for file in os.listdir("./msg/langs/"):
-            langs[file[:-5]] = (json.load(open('./msg/langs/'+file)))
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
