@@ -60,6 +60,8 @@ class msg(commands.Cog):
             except KeyError:
                 data["lang"] = "fr"
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
+            for file in os.listdir("./servers/"):
+                servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
