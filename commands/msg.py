@@ -70,6 +70,8 @@ class msg(commands.Cog):
         data["muted_role"] = 0
         data["lang"] = "fr"
         json.dump(data, open(f"./servers/{guild.id}.json", "w"))
+        for file in os.listdir("./servers/"):
+            servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
@@ -78,6 +80,8 @@ class msg(commands.Cog):
             os.remove(f"./msg/custom_commands/{guild.id}.json")
         except:
             pass
+        for file in os.listdir("./servers/"):
+            servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
 
     @commands.command(name="showmsg")
     @commands.has_permissions(administrator=True)
