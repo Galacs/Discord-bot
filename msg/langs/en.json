@@ -1,0 +1,6 @@
+{
+    "ping":{
+        "response":"Pong! My ping is {latency} ms",
+        "help":"The command takes no arguments"
+    }
+}
