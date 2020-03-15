@@ -1,5 +1,6 @@
 import discord, json, os
 from discord.ext import commands
+from bot import isBotOwner
 
 langs = {}
 servers_settings = {}
@@ -7,17 +8,29 @@ servers_settings = {}
 for file in os.listdir("./msg/langs/"):
     langs[file[:-5]] = (json.load(open('./msg/langs/'+file)))
 
+for file in os.listdir("./servers/"):
+    servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
+
+
 def getmsg(guild, r1, r2):
     data = json.load(open(f'./msg/custom_commands/{guild.id}.json'))
     try:
         d = data[r1][r2]
     except:
+        
         d = langs[servers_settings[str(guild.id)]["lang"]][r1][r2]
     return d
 
 class msg(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.command(name="listlangs2")
+    @commands.check(isBotOwner)
+    async def listlangsCmd(self, ctx):
+        print(langs)
+        print(servers_settings)
+
     @commands.Cog.listener()
     async def on_ready(self):
         if not os.path.exists("servers"):
@@ -47,8 +60,6 @@ class msg(commands.Cog):
             except KeyError:
                 data["lang"] = "fr"
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
-            for file in os.listdir("./servers/"):
-                servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
 
     @commands.Cog.listener()
     async def on_guild_join(self, guild):
