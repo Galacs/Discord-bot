@@ -12,7 +12,6 @@ def getmsg(guild, r1, r2):
     try:
         d = data[r1][r2]
     except:
-        print(langs)
         d = langs[servers_settings[str(guild.id)]["lang"]][r1][r2]
     return d
 
