@@ -16,7 +16,7 @@ class langs_utils(commands.Cog):
             self.langs[file[:-5]] = (json.load(open('./msg/langs/'+file)))
         languages = self.langs # pylint: disable=unused-variable
     
-    @commands.command(name="listlangs")
+    @commands.command(name="listlangs1")
     @commands.check(isBotOwner)
     async def listlangsCmd(self, ctx):
         await ctx.send(self.langs)

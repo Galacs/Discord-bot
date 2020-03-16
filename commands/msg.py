@@ -25,11 +25,20 @@ class msg(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="listlangs2")
+    @commands.command(name="listettings")
     @commands.check(isBotOwner)
     async def listlangsCmd(self, ctx):
-        print(langs)
-        print(servers_settings)
+        await ctx.send(servers_settings)
+    @commands.command(name="reloadsettings")
+    @commands.check(isBotOwner)
+    async def reload_settingsCmd(self, ctx):
+        for file in os.listdir("./servers/"):
+            servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
+    @commands.command(name="listlangs")
+    @commands.check(isBotOwner)
+    async def list_langsCmd(self, ctx):
+        await ctx.send(langs)
+
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -72,8 +81,7 @@ class msg(commands.Cog):
         data["muted_role"] = 0
         data["lang"] = "fr"
         json.dump(data, open(f"./servers/{guild.id}.json", "w"))
-        for file in os.listdir("./servers/"):
-            servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
+        servers_settings[str(guild.id)] = (json.load(open('./servers/'+f"{str(guild.id)}.json")))
 
     @commands.Cog.listener()
     async def on_guild_remove(self, guild):
@@ -82,8 +90,7 @@ class msg(commands.Cog):
             os.remove(f"./msg/custom_commands/{guild.id}.json")
         except:
             pass
-        for file in os.listdir("./servers/"):
-            servers_settings[file[:-5]] = (json.load(open('./servers/'+file)))
+        del servers_settings[str(guild.id)]
 
     @commands.command(name="showmsg")
     @commands.has_permissions(administrator=True)
