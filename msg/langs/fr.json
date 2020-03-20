@@ -1,6 +1,0 @@
-{
-    "ping":{
-        "response":"Pong! Mon ping est de {latency}ms",
-        "help":"La commande ne prend aucun arguments"
-    }
-}
