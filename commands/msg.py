@@ -2,6 +2,7 @@ import json
 import os
 from discord.ext import commands
 <<<<<<< HEAD
+<<<<<<< HEAD
 from bot import isBotOwner
 
 servers_settings = {}
@@ -30,6 +31,10 @@ def getmsg(guild, msg):
     return json.load(open(f'./servers/{guild.id}.json'))[msg]
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
 
+=======
+def getmsg(guild, msg):
+    return json.load(open(f'./servers/{guild.id}.json'))[msg]
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
 
 class msg(commands.Cog):
 
@@ -63,11 +68,14 @@ class msg(commands.Cog):
             except FileNotFoundError:
                 data = {}
 <<<<<<< HEAD
+<<<<<<< HEAD
             try:
                 json.load(open(f'./msg/custom_commands/{guild.id}.json'))
             except FileNotFoundError:
                 json.dump({}, open(
                     f"./msg/custom_commands/{guild.id}.json", "w"))
+=======
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
 =======
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
             data["server_name"] = guild.name
@@ -81,9 +89,12 @@ class msg(commands.Cog):
                 data["muted_role"] = 0
             json.dump(data, open(f"./servers/{guild.id}.json", "w"))
 <<<<<<< HEAD
+<<<<<<< HEAD
             for file in os.listdir("./servers/"):
                 servers_settings[int(file[:-5])] = (
                     json.load(open('./servers/'+file)))
+=======
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
 =======
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
 
@@ -104,9 +115,12 @@ class msg(commands.Cog):
         try:
             os.remove(f"./servers/{guild.id}.json")
 <<<<<<< HEAD
+<<<<<<< HEAD
             os.remove(f"./msg/custom_commands/{guild.id}.json")
         except FileNotFoundError:
 =======
+=======
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
         except:
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
             pass
@@ -127,6 +141,7 @@ class msg(commands.Cog):
     async def setmsgCmd(self, ctx, response: str,message: str):
         await ctx.message.delete()
 <<<<<<< HEAD
+<<<<<<< HEAD
         data = json.load(open(f'./msg/custom_commands/{ctx.guild.id}.json'))
         try:
             data[r1][r2] = m
@@ -137,16 +152,22 @@ class msg(commands.Cog):
             f"./msg/custom_commands/{ctx.guild.id}.json", "w"))
         await ctx.send(f"Le message {r1} {r2} a été changé pour {m}")
 =======
+=======
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
         data = json.load(open(f'./servers/{ctx.guild.id}.json'))
         data[response] = message
         json.dump(data, open(f"./servers/{ctx.guild.id}.json", "w"))
         await ctx.send(f"Le message {response} a été changé pour {message}")
+<<<<<<< HEAD
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
+=======
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
 
     @commands.command(name="setdefault")
     @commands.has_permissions(administrator=True)
     async def setdefault(self, ctx, msg):
         await ctx.message.delete()
+<<<<<<< HEAD
 <<<<<<< HEAD
         data = json.load(open(f'./msg/custom_commands/{ctx.guild.id}.json'))
         if r2 is not None:
@@ -158,19 +179,28 @@ class msg(commands.Cog):
         await ctx.send(f"Le message {r1} {r2} a étais remis à defaut")
 
 =======
+=======
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
         data = json.load(open(f'./servers/{ctx.guild.id}.json'))
         del data[msg]
         json.dump(data, open(f"./servers/{ctx.guild.id}.json", "w"))
         await ctx.send(f"Le message {msg} a étais remis à defaut")
+<<<<<<< HEAD
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
+=======
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
     @commands.command(name="showallmsg")
     @commands.has_permissions(administrator=True)
     async def showallmsg(self, ctx):
         await ctx.message.delete()
 <<<<<<< HEAD
+<<<<<<< HEAD
         await ctx.send(json.load(open(
             f'./msg/custom_commands/{ctx.guild.id}.json')))
 
+=======
+        await ctx.send(json.load(open(f'./servers/{ctx.guild.id}.json')))
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
 =======
         await ctx.send(json.load(open(f'./servers/{ctx.guild.id}.json')))
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd

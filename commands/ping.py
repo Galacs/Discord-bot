@@ -11,13 +11,19 @@ class ping(commands.Cog):
     async def pingCmd(self, ctx):
         await ctx.message.delete()
 <<<<<<< HEAD
+<<<<<<< HEAD
         await ctx.send(getmsg(ctx.guild, "ping", "response").format(
             latency=round(int(self.bot.latency*1000), 1)))
 =======
+=======
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
         try:
             await ctx.send(getmsg(ctx.guild, "ping").format(latency=round(int(self.bot.latency*1000), 1)))
         except KeyError:
             await ctx.send('Pong! Mon ping est de {0}ms'.format(round(int(self.bot.latency*1000), 1)))
+<<<<<<< HEAD
+>>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
+=======
 >>>>>>> parent of 2d2966c... Created lang files and langs system using ping cmd
         return
 
