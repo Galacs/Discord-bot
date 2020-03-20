@@ -1,6 +1,6 @@
-import discord
 from discord.ext import commands
 from bot import isBotOwner
+
 
 class cogs_utils(commands.Cog):
 
@@ -28,7 +28,6 @@ class cogs_utils(commands.Cog):
         self.bot.unload_extension(f'commands.{extension}')
         self.bot.load_extension(f'commands.{extension}')
         await ctx.send(f"{str(extension)} a été rechargé")
-    
 
 
 def setup(bot):

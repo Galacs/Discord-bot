@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 
+
 class kick(commands.Cog):
 
     def __init__(self, bot):
@@ -8,7 +9,7 @@ class kick(commands.Cog):
 
     @commands.command(name="kick")
     @commands.has_permissions(kick_members=True)
-    async def kickCmd (self, ctx, member: discord.Member=None, arg=""):
+    async def kickCmd(self, ctx, member: discord.Member = None, arg=""):
         await ctx.message.delete()
         await member.kick(reason=f"Kick par {str(ctx.message.author)}")
         if arg == "":
